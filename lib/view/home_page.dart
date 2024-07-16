@@ -34,6 +34,30 @@ class _HomePageState extends State<HomePage> {
       'https://www.startech.com.bd/image/cache/catalog/home/banner/eid-mobile-fest.ai-banner-982x500.webp'
     ];
 
+    List<Map> categories = [
+      {'title': 'AC', 'icon': 'assets/images/category/ac.png'},
+      {'title': 'Drone', 'icon': 'assets/images/category/drone-48x48.png'},
+      {'title': 'Gimbal', 'icon': 'assets/images/category/gimbal-48x48.png'},
+      {'title': 'Laptop', 'icon': 'assets/images/category/laptop-48x48.png'},
+      {
+        'title': 'Laptop Accessories',
+        'icon': 'assets/images/category/laptop-acc-icon-48x48.png'
+      },
+      {
+        'title': 'Mobile',
+        'icon': 'assets/images/category/mobile-phone-48x48.png'
+      },
+      {
+        'title': 'Mobile Accessories',
+        'icon': 'assets/images/category/mobile-phone-accessories-48x48.png'
+      },
+      {
+        'title': 'Power Station',
+        'icon': 'assets/images/category/powerstation-48x48.png'
+      },
+      {'title': 'TV', 'icon': 'assets/images/category/tv-48x48.png'},
+    ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.primaryColor,
@@ -60,6 +84,8 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        controller: ScrollController(),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -285,32 +311,181 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColor.logoColor,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
+              // Container(
+              //   decoration: BoxDecoration(
+              //     color: AppColor.logoColor,
+              //     borderRadius: BorderRadius.circular(10),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: Colors.black,
+              //         blurRadius: 5,
+              //         spreadRadius: .3,
+              //       )
+              //     ],
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: MarqueeText(
+              //       text: TextSpan(
+              //         text:
+              //             '15th July Monday, all our outlets are open. Additionally, our online activities are open and operational.',
+              //       ),
+              //       style: TextStyle(
+              //         fontSize: 24,
+              //         color: Colors.black,
+              //       ),
+              //       speed: 30,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              Center(
+                child: Text(
+                  'Featued Category',
+                  style: TextStyle(
                       color: Colors.black,
-                      blurRadius: 5,
-                      spreadRadius: .3,
-                    )
-                  ],
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MarqueeText(
-                    text: TextSpan(
-                      text: '15th July Monday, all our outlets are open. Additionally, our online activities are open and operational.',
-                    ),
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black,
-                    ),
-                    speed: 30,
+              ),
+              Center(
+                child: Text(
+                  'Get Your Desired Product from Featured Category!',
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(.5),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GridView.builder(
+                controller: ScrollController(),
+                itemCount: categories.length,
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  // mainAxisExtent: 100,
+                  crossAxisCount: 4, // Number of columns in the grid
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColor.logoColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(.5),
+                          spreadRadius: .3,
+                          blurRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          categories[index]['title'],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Flexible(
+                          child: Image.asset(
+                            categories[index]['icon'],
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GridView.builder(
+                controller: ScrollController(),
+                itemCount: 5,
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    // mainAxisExtent: 100,
+                    crossAxisCount: 2, // Number of columns in the grid
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: .6),
+                itemBuilder: (context, index) {
+                  return LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColor.logoColor,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(.5),
+                                  spreadRadius: .3,
+                                  blurRadius: 5,
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.network(
+                                    'https://www.startech.com.bd/image/cache/catalog/mobile/oneplus/nord-n30-se/nord-n30-se-01-200x200.png'),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Divider(
+                                    color: Colors.black.withOpacity(.2),
+                                    thickness: 2,
+                                  ),
+                                ),
+                                Text(
+                                  'OnePlus Nord N30 SE 5G Smartphone (4/128GB)',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  '15,999 ৳',
+                                  style: TextStyle(
+                                      color: AppColor.avaterbg,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+
+                            width: constraints.maxWidth * .9,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
+                            ),
+                            child: Center(
+                                child: Text(
+                                  '499৳ Discount on Checkout',
+                                  style: TextStyle(color: AppColor.logoColor),
+                                )),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),
